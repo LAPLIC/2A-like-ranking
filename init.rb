@@ -2,29 +2,29 @@ require_relative "classificador"
 
 p " "
 p "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-p "$$$$$$$$$$    Bem vindo ao classificador de evolucao do LAPLIC          $$$$$$$$$"
-p "$$$$$$$$$$    Essa ferramenta atribui um coeficiente da possibilidade   $$$$$$$$$"
-p "$$$$$$$$$$    de uma determinada sequencia evoluir para outra,          $$$$$$$$$"
-p "$$$$$$$$$$    atribuindo valores de 0 (zero) a 1 (um) entre as          $$$$$$$$$"
-p "$$$$$$$$$$    comparacoes, onde zero (0) nada possiveis e um (1) para   $$$$$$$$$"
-p "$$$$$$$$$$    Sequencias totalmente possiveis, para mais detalhes       $$$$$$$$$"
-p "$$$$$$$$$$    do algoritimo acesse https://github.com/LAPLIC            $$$$$$$$$"
+p "$$$$$$$$$$     Welcome to pseudoPLIC, a software developed by LAPLIC!    $$$$$$$$$"
+p "$$$$$$$$$$                                                               $$$$$$$$$"
+p "$$$$$$$$$$    This tool will help you to compare amino acid sequences    $$$$$$$$$"
+p "$$$$$$$$$$    and to predict which one is closer to the reference.       $$$$$$$$$"
+p "$$$$$$$$$$    The comparisons are ranked from 0 (zero) to 1 (one),       $$$$$$$$$"
+p "$$$$$$$$$$    where 0 (zero) corresponds to totally different sequences  $$$$$$$$$"
+p "$$$$$$$$$$    and 1 (one) to identical sequences.                        $$$$$$$$$"
+p "$$$$$$$$$$    For more details, go to: https://github.com/LAPLIC         $$$$$$$$$"
 p "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
 p " "
 
 c = Classification.new()
 dupla = []
 
-p "-----   Deseja ler o arquivo references.txt para importa sequencias de referenica automaticamente?  ---------"
-p "1 - Sim"
-p "2 - Nao"
+p "-----   Do you want to read the references.txt file to import reference sequences automatically?  ---------"
+p "1 - Yes"
+p "2 - No"
 p " "
 option = gets
 if option.chomp.to_i == 1
-	p "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-	p "$$$$$$$$ Lendo as referencias no arquivo  $$$$$"
-	p "$$$$$$$$   references.xlsx na mesma pasta $$$$$"
-	p "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+	p "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+	p "$$$$$$$$ Reading references from references.xlsx $$$$$"
+	p "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
 	IO.readlines('references.txt').each_with_index.map do |line|
 	  unless line.chomp.empty?
 			dupla << line.chomp
@@ -36,7 +36,7 @@ if option.chomp.to_i == 1
 	end
 	p "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
 	p "$$$$$$$$                                  $$$$$"
-	p "$$$$$$$$   Lista de referencias           $$$$$"
+	p "$$$$$$$$         Reference list           $$$$$"
 	p "$$$$$$$$                                  $$$$$"
 	p "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
 	c.reference_sequences.each do |reference|
@@ -46,16 +46,15 @@ if option.chomp.to_i == 1
 	end
 end
 
-p "-----   Deseja ler o arquivo sequences.txt para importa sequencias automaticamente?  ---------"
-p "1 - Sim"
-p "2 - Nao"
+p "-----   Do you want to read sequences.txt file to import sequences automatically?  ---------"
+p "1 - Yes"
+p "2 - No"
 p " "
 option = gets
 if option.chomp.to_i == 1
-	p "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-	p "$$$$$$$$ Lendo as Sequencias no arquivo  $$$$$"
-	p "$$$$$$$$   sequences.xlsx na mesma pasta $$$$$"
-	p "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+	p "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+	p "$$$$$$$$ Reading references from references.xlsx $$$$$"
+	p "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
 	IO.readlines('sequences.txt').each_with_index.map do |line|
 	  unless line.chomp.empty?
 			dupla << line.chomp
@@ -67,7 +66,7 @@ if option.chomp.to_i == 1
 	end
 	p "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
 	p "$$$$$$$$                                  $$$$$"
-	p "$$$$$$$$   Lista de Sequencias            $$$$$"
+	p "$$$$$$$$          Sequence list           $$$$$"
 	p "$$$$$$$$                                  $$$$$"
 	p "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
 	c.analyzed_sequences.each do |reference|
@@ -79,24 +78,24 @@ end
 
 
 while true
-	p "$$$$$$$$$  pressione ENTER para ver opcoes $$$$$$$$$$$"
+	p "$$$$$$$$$  Press ENTER to view options $$$$$$$$$$$"
   seq = gets
-	p "$$$$$$$$$$$$$ Opcoes $$$$$$$$$$$$$$"
+	p "$$$$$$$$$$$$$ Options $$$$$$$$$$$$$$"
 	p " "
-	p "0 - Adicionar REFERENCIA as #{c.reference_sequences.size} ja existentes"
-	p "1 - Exibir referencias "
-	p "2 - Adicionar SEQUENCIA as #{c.analyzed_sequences.size} ja existentes"
-	p "3 - Exibir sequencias ja Adicionadas"
-	p "4 - Exibir pesos dos codons"
-	p "5 - Alterar os pesos dos codons"
-	p "6 - Exibir ranking"
-	p "7 - Sair "
+	p "0 - Add REFERENCE to #{c.reference_sequences.size} already existing"
+	p "1 - View references "
+	p "2 - Add SEQUENCCE to #{c.analyzed_sequences.size} already existing"
+	p "3 - View sequences already added"
+	p "4 - View codon weights"
+	p "5 - Change codon weights"
+	p "6 - View ranking"
+	p "7 - Exit"
 
 	option = gets
 	if option.chomp.to_i == 1
 		Gem.win_platform? ? (system "cls") : (system "clear")
 		p " "
-		p "$$$$$$$$$$$$$ Opcao 1 - Exibir referencias $$$$$$$$$$$$$$"
+		p "$$$$$$$$$$$$$ Option 1 - View references $$$$$$$$$$$$$$"
 		p " "
 		c.reference_sequences.each do |r|
 			p r.id
@@ -109,11 +108,11 @@ while true
 	elsif option.chomp.to_i == 0
 		Gem.win_platform? ? (system "cls") : (system "clear")
 		p " "
-		p "$$$$$$$$$$$$$ Opcao 0 - Adicionar REFERENCIA $$$$$$$$$$$$$$$$$"
+		p "$$$$$$$$$$$$$ Option 0 - Add REFERENCE $$$$$$$$$$$$$$$$$"
 		p " "
-		p "$$$$$$$$$$$$$ Digite ID da nova REFERENCIA $$$$$$$$$$$$$$$"
+		p "$$$$$$$$$$$$$ Enter ID of the new REFERENCE $$$$$$$$$$$$$$$"
 		id = gets
-		p "$$$$$$$$$$$$$ Digite nova REFERENCIA $$$$$$$$$$$$$$$"
+		p "$$$$$$$$$$$$$ Enter new REFERENCE $$$$$$$$$$$$$$$"
 		seq = gets
 		c.add_reference(id.chomp, seq.chomp)
 		p " "
@@ -121,11 +120,11 @@ while true
 	elsif option.chomp.to_i == 2
 		Gem.win_platform? ? (system "cls") : (system "clear")
 		p " "
-		p "$$$$$$$$$$$$$ Opcao 2 - Adicionar SEQUENCIA $$$$$$$$$$$$$$$$$"
+		p "$$$$$$$$$$$$$ Option 2 - Add SEQUENCE $$$$$$$$$$$$$$$$$"
 		p " "
-		p "$$$$$$$$$$$$$ Digite ID nova SEQUENCIA $$$$$$$$$$$$$$$"
+		p "$$$$$$$$$$$$$ Enter ID of the new SEQUENCE $$$$$$$$$$$$$$$"
 		id = gets
-		p "$$$$$$$$$$$$$ Digite nova SEQUENCIA $$$$$$$$$$$$$$$"
+		p "$$$$$$$$$$$$$ Enter new SEQUENCE $$$$$$$$$$$$$$$"
 		seq = gets
 		c.add_sequence(id.chomp, seq.chomp)
 		p " "
@@ -133,7 +132,7 @@ while true
 	elsif option.chomp.to_i == 3
 		Gem.win_platform? ? (system "cls") : (system "clear")
 		p " "
-		p "$$$$$$$$$$$$$ Opcao 3 - Exibir sequencias ja Adicionadas $$$$$$$$$$$$$$$$$"
+		p "$$$$$$$$$$$$$ Option 3 - View sequences already added $$$$$$$$$$$$$$$$$"
 		p " "
 		c.analyzed_sequences.each do |r|
 			p r.id
@@ -146,7 +145,7 @@ while true
 	elsif option.chomp.to_i == 4
 		Gem.win_platform? ? (system "cls") : (system "clear")
 		p " "
-		p "$$$$$$$$$$$$$ Opcao 4 - Exibir pesos dos codons $$$$$$$$$$$$$$$$$"
+		p "$$$$$$$$$$$$$ Option 4 - View codon weights $$$$$$$$$$$$$$$$$"
 		p " "
 		p "Primeiro codon => #{c.weight_first_codon}"
 		p "Segundo codon  => #{c.weight_secound_codon}"
@@ -156,38 +155,38 @@ while true
 	elsif option.chomp.to_i == 5
 		Gem.win_platform? ? (system "cls") : (system "clear")
 		p " "
-		p "$$$$$$$$$$$$$ Opcao 5 - Alterar os pesos dos codons $$$$$$$$$$$$$$$$$"
+		p "$$$$$$$$$$$$$ Option 5 - Change codon weights $$$$$$$$$$$$$$$$$"
 		p " "
-		p "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-		p "$$$$$$$$$$    Digite valores separados por virgula       $$$$$$$$$"
-		p "$$$$$$$$$$    Somatorio deve ser sempre igual a 1        $$$$$$$$$"
-		p "$$$$$$$$$$    Ex: 0.3,0.6,0.1                            $$$$$$$$$"
+		p "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+		p "$$$$$$$$$$      Enter values separated by commas      $$$$$$$$$"
+		p "$$$$$$$$$$      The sum must always be equal to 1     $$$$$$$$$"
+		p "$$$$$$$$$$      Ex: 0.3,0.6,0.1                       $$$$$$$$$"
 		p "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
 		p " "
 		weight = gets
 		if c.weight_codons(weight.split(",")[0], weight.split(",")[1], weight.split(",")[2])
-			p "Pesos modificados com sucesso"
+			p "Codon weights successfully modified"
 		else
-			p "Nao foi possivel realizar a mudanca"
+			p "Change in codon weights failed"
 		end
 	elsif option.chomp.to_i == 6
 		Gem.win_platform? ? (system "cls") : (system "clear")
 		p " "
-		p "$$$$$$$$$$$$$ Opcao 6 - Exibir ranking $$$$$$$$$$$$$$$$$"
+		p "$$$$$$$$$$$$$ Option 6 - View ranking $$$$$$$$$$$$$$$$$"
 		p " "
 		c.show_ranking
 		p " "
-		p "$$$$$$$$$$$$   Consulte o arquivo results.txt     $$$$$$$$$$$$$$$$"
-		p "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+		p "$$$$$$$$$$$$   See results.txt file    $$$$$$$$$$$$$$$$"
+		p "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
 	elsif option.chomp.to_i == 7
 		Gem.win_platform? ? (system "cls") : (system "clear")
 		p " "
-		p "$$$$$$$$$$$$$ Opcao 7 - Sair $$$$$$$$$$$$$$$$$"
+		p "$$$$$$$$$$$$$ Option 7 - Exit $$$$$$$$$$$$$$$$$"
 		p " "
 		p "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-		p "$$$$$$$$$$    Obrigado por utiizar nossa ferramenta      $$$$$$$$$"
-		p "$$$$$$$$$$    acesse www.laplic.com.br para mais opcoes  $$$$$$$$$"
-		p "$$$$$$$$$$    e ferramentas de bioinformatica            $$$$$$$$$"
+		p "$$$$$$$$$$    Thank you for using our software           $$$$$$$$$"
+		p "$$$$$$$$$$    Go to www.laplic.com.br for more options   $$$$$$$$$"
+		p "$$$$$$$$$$    and bioinformatic tools.                   $$$$$$$$$"
 		p "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
 		p " "
 		break
@@ -195,7 +194,7 @@ while true
 		p " "
 		p "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
 		p " "
-		p "$$$$$$$$$$$      Opcao invalida     $$$$$$$$$$$$$$$$$$$$"
+		p "$$$$$$$$$$$      Invalid Option     $$$$$$$$$$$$$$$$$$$$"
 		p " "
 		p "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
 	end
