@@ -2,7 +2,7 @@ require_relative "classificador"
 
 p " "
 p "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-p "$$$$$$$$$$     Welcome to pseudoPLIC, a software developed by LAPLIC!    $$$$$$$$$"
+p "$$$$$$$$$$   Welcome to 2A-like ranking, a software developed by LAPLIC! $$$$$$$$$"
 p "$$$$$$$$$$                                                               $$$$$$$$$"
 p "$$$$$$$$$$    This tool will help you to compare amino acid sequences    $$$$$$$$$"
 p "$$$$$$$$$$    and to predict which one is closer to the reference.       $$$$$$$$$"
