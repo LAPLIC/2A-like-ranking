@@ -1,1 +1,1 @@
-# pseudoPLIC
+# 2A-like ranking
