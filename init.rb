@@ -1,4 +1,4 @@
-require_relative "classificador"
+require_relative "classifier"
 
 p " "
 p "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
@@ -147,9 +147,9 @@ while true
 		p " "
 		p "$$$$$$$$$$$$$ Option 4 - View codon weights $$$$$$$$$$$$$$$$$"
 		p " "
-		p "Primeiro codon => #{c.weight_first_codon}"
-		p "Segundo codon  => #{c.weight_secound_codon}"
-		p "Terceiro codon => #{c.weight_third_codon}"
+		p "First codon => #{c.weight_first_codon}"
+		p "Second codon  => #{c.weight_secound_codon}"
+		p "Third codon => #{c.weight_third_codon}"
 		p " "
 		p "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
 	elsif option.chomp.to_i == 5
@@ -160,11 +160,11 @@ while true
 		p "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
 		p "$$$$$$$$$$      Enter values separated by commas      $$$$$$$$$"
 		p "$$$$$$$$$$      The sum must always be equal to 1     $$$$$$$$$"
-		p "$$$$$$$$$$      Ex: 0.3,0.6,0.1                       $$$$$$$$$"
+		p "$$$$$$$$$$      Ex: 0.3,0.6,0.1,                       $$$$$$$$$"
 		p "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
 		p " "
 		weight = gets
-		if c.weight_codons(weight.split(",")[0], weight.split(",")[1], weight.split(",")[2])
+		if c.weight_codons(weight.split(",")[0].to_f, weight.split(",")[1].to_f, weight.split(",")[2].to_f)
 			p "Codon weights successfully modified"
 		else
 			p "Change in codon weights failed"
