@@ -4,13 +4,13 @@ require_relative "aminoacids"
 class Classification
 	include Aminoacids
  
-	attr_reader :analyzed_sequences, :reference_sequences, :weight_first_codon, :weight_secound_codon, :weight_third_codon
+	attr_reader :analyzed_sequences, :reference_sequences, :weight_first_codon, :weight_second_codon, :weight_third_codon
 	
 	def initialize()
     @reference_sequences = [] 
     @analyzed_sequences = []
     @weight_first_codon = 0.3
-    @weight_secound_codon = 0.6
+    @weight_second_codon = 0.6
     @weight_third_codon = 0.1
   end
 
@@ -32,11 +32,11 @@ class Classification
   	end
   end
 
-  def weight_codons(new_weight_first_codon, new_weight_secound_codon, new_weight_third_codon)
-    sum = new_weight_first_codon + new_weight_secound_codon + new_weight_third_codon
+  def weight_codons(new_weight_first_codon, new_weight_second_codon, new_weight_third_codon)
+    sum = new_weight_first_codon + new_weight_second_codon + new_weight_third_codon
     if sum = 1
       @weight_first_codon = new_weight_first_codon
-      @weight_secound_codon = new_weight_secound_codon
+      @weight_second_codon = new_weight_second_codon
       @weight_third_codon = new_weight_third_codon
       true
     else
@@ -50,7 +50,7 @@ class Classification
       File.open('results.txt', 'w') do |f2|  
         @reference_sequences.each do |reference|
           f2.puts "*******************************************************************************************"
-          f2.puts "***********    resultados para referencia:" 
+          f2.puts "***********    results for reference:" 
           f2.puts "***********    #{reference.id}" 
           f2.puts "***********    #{reference.reference_nucleotide}" 
           f2.puts "***********    #{reference.reference_aminoacid}"
@@ -60,13 +60,13 @@ class Classification
             f2.puts "#{key} -----> #{(value * 100).round(1)}%"
           end
           f2.puts " "
-          f2.puts "     FIM para #{reference.id}   " 
+          f2.puts "     END for #{reference.id}   " 
           f2.puts "*******************************************************************************************"
           f2.puts " "
         end   
       end
   	else
-  		p "Não existem sequencias para comparar com a referencia"
+  		p "There are no sequences to compare with the reference"
   	end
   end
 
@@ -75,15 +75,15 @@ class Classification
 
   def coef_laplic(reference)
     p "<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>"
-    p "Analise  em relacao a referencia: #{reference.id} >> #{reference.reference_aminoacid}"
+    p "Analysis in relation to reference: #{reference.id} >> #{reference.reference_aminoacid}"
   	results = {}
-  	@analyzed_sequences.each do |sequence| #loop para cada sequencia adicionada na comparação
+  	@analyzed_sequences.each do |sequence| #loop for each sequence added in the comparison
   		results[sequence.id] = 0              
   		sequence_codon = 0
-  		reference.reference_aminoacid.each_char do |aminoacid| #loop para cada aminoacido da referencia
-  			analyzed_codon = sequence.reference_nucleotide[sequence_codon..sequence_codon + 2] #separa os codons da sequencia autal
+  		reference.reference_aminoacid.each_char do |aminoacid| #loop for each reference amino acid
+  			analyzed_codon = sequence.reference_nucleotide[sequence_codon..sequence_codon + 2] #separates the codons from the current sequence
   			points_codon = analize_bases(aminoacid, analyzed_codon)
-  			results[sequence.id] += (points_codon * reference.weight_aminoacid) #calcula o valor do acerto
+  			results[sequence.id] += (points_codon * reference.weight_aminoacid) #calculates the value of the hit
   			sequence_codon += 3
   		end
   	end
@@ -93,27 +93,27 @@ class Classification
 
   def analize_bases(aminoacid, analyzed_codon)
   	points_codon = 0
-  	no_hit_base_1 = true, no_hit_base_2 = true, no_hit_base_3 = true #garante que não foi contado pontos para nenhuma base
-  		p "Avaliacaoo do aminoacido: #{aminoacid} em relação ao codon: #{analyzed_codon}"
-  		p "@@@@@@@@ analizado => trinca >> pontos"
-			Aminoacids::DICTIONARY[aminoacid.to_sym].each do |trinca| #captura e compara as trincas da referencia com o codon da sequencia
-				if (analyzed_codon[0] == trinca[0]) && no_hit_base_1
+  	no_hit_base_1 = true, no_hit_base_2 = true, no_hit_base_3 = true #ensures that no points were counted for any nucleotides of the codon
+  		p "Evaluation of the amino acid: #{aminoacid} in relation to the codon: #{analyzed_codon}"
+  		p "@@@@@@@@ analyzed => codon >> scores"
+			Aminoacids::DICTIONARY[aminoacid.to_sym].each do |codon| #captures and compares the reference codon with the sequence codon
+				if (analyzed_codon[0] == codon[0]) && no_hit_base_1
 					points_codon += @weight_first_codon
 					no_hit_base_1 = false
 				end
-				p "@@@@@@@@      #{analyzed_codon[0]}    =>    #{trinca[0]}   >>   #{points_codon}"
-				if (analyzed_codon[1] == trinca[1]) && no_hit_base_2
-					points_codon += @weight_secound_codon
+				p "@@@@@@@@      #{analyzed_codon[0]}    =>    #{codon[0]}   >>   #{points_codon}"
+				if (analyzed_codon[1] == codon[1]) && no_hit_base_2
+					points_codon += @weight_second_codon
 					no_hit_base_2 = false
 				end
-				p "@@@@@@@@      #{analyzed_codon[1]}    =>    #{trinca[1]}   >>   #{points_codon}"
-				if (analyzed_codon[2] == trinca[2]) && no_hit_base_3
+				p "@@@@@@@@      #{analyzed_codon[1]}    =>    #{codon[1]}   >>   #{points_codon}"
+				if (analyzed_codon[2] == codon[2]) && no_hit_base_3
 					points_codon += @weight_third_codon
 					no_hit_base_3 == false
 				end
-				p "@@@@@@@@      #{analyzed_codon[2]}    =>    #{trinca[2]}   >>   #{points_codon}"
+				p "@@@@@@@@      #{analyzed_codon[2]}    =>    #{codon[2]}   >>   #{points_codon}"
 				p " "
-				break if points_codon >= 1.0000000000000000000 # se já acertou as três posições não é mais necessário comparar
+				break if points_codon >= 1.0000000000000000000 # if it have already hit the three positions it is no longer necessary to compare
 			end
   	points_codon
   end
