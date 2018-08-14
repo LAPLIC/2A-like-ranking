@@ -8,6 +8,6 @@ class Sequence
 		@id = id.gsub(/^[>]/, '')
 		@reference_nucleotide = reference_sequence.upcase.gsub(/\s+/, "").gsub(/[U]/, 'T')
 		@reference_aminoacid = to_aminoacid(@reference_nucleotide)
-    @weight_aminoacid = 1/@reference_aminoacid.size.to_f # atribui o peso numérico de cada aminoácido EX: "WQNK" 1/4 = 0.25 cada 
+    @weight_aminoacid = 1/@reference_aminoacid.size.to_f # assigns the numerical weight of each amino acid EX: "WQNK" 1/4 = 0.25 each 
 	end
 end
