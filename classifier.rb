@@ -57,7 +57,7 @@ class Classification
           f2.puts " " 
           results = coef_laplic(reference)
           results.each do |key, value|
-            f2.puts "#{key} -----> #{(value * 100).round(1)}%"
+            f2.puts "#{key} -----> #{value}"
           end
           f2.puts " "
           f2.puts "     FIM para #{reference.id}   " 
